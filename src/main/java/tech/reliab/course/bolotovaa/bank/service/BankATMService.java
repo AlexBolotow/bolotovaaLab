@@ -5,7 +5,7 @@ import tech.reliab.course.bolotovaa.bank.entity.Employee;
 
 import java.math.BigDecimal;
 
-public interface BankAtmService {
+public interface BankATMService {
     BankATM createBankAtm(BankATM bankAtm);
 
     boolean depositMoney(BankATM bankAtm, BigDecimal amount);

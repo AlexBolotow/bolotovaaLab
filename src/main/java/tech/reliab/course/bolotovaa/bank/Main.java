@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         BankService bankService = new BankServiceImpl();
         BankOfficeService bankOfficeService = new BankOfficeServiceImpl();
-        BankAtmService bankAtmService = new BankAtmServiceImpl();
+        BankATMService bankAtmService = new BankATMServiceImpl();
         UserService userService = new UserServiceImpl();
         EmployeeService employeeService = new EmployeeServiceImpl();
         CreditAccountService creditAccountService = new CreditAccountServiceImpl();

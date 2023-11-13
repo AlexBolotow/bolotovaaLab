@@ -3,11 +3,11 @@ package tech.reliab.course.bolotovaa.bank.service.impl;
 import tech.reliab.course.bolotovaa.bank.entity.BankATM;
 import tech.reliab.course.bolotovaa.bank.entity.Employee;
 import tech.reliab.course.bolotovaa.bank.enums.BankATMStatus;
-import tech.reliab.course.bolotovaa.bank.service.BankAtmService;
+import tech.reliab.course.bolotovaa.bank.service.BankATMService;
 
 import java.math.BigDecimal;
 
-public class BankAtmServiceImpl implements BankAtmService {
+public class BankATMServiceImpl implements BankATMService {
     @Override
     public BankATM createBankAtm(BankATM bankAtm) {
         if (bankAtm.getBank() == null) {
