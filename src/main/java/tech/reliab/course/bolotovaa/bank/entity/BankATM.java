@@ -1,18 +1,17 @@
 package tech.reliab.course.bolotovaa.bank.entity;
 
-import tech.reliab.course.bolotovaa.bank.enums.BankAtmStatus;
+import tech.reliab.course.bolotovaa.bank.enums.BankATMStatus;
 import tech.reliab.course.bolotovaa.bank.utils.DecimalFormatConstants;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.UUID;
 
-public class BankAtm {
+public class BankATM {
     public static final BigDecimal MAX_TOTAL_MONEY = new BigDecimal(70000);
-    private final UUID id;
+    private final long id;
     private String name;
     private String address;
-    private BankAtmStatus status;
+    private BankATMStatus status;
     private Bank bank;
     private BankOffice office;
     private Employee serviceEmployee;
@@ -21,9 +20,9 @@ public class BankAtm {
     private BigDecimal totalMoney;
     private BigDecimal serviceCost;
 
-    public BankAtm(String name, String address, BankAtmStatus status, Bank bank, BankOffice bankOffice, Employee serviceEmployee,
+    public BankATM(long id, String name, String address, BankATMStatus status, Bank bank, BankOffice bankOffice, Employee serviceEmployee,
                    boolean isWithdrawMoney, boolean isDepositMoney, BigDecimal totalMoney, BigDecimal serviceCost) {
-        this.id = UUID.randomUUID();
+        this.id = id;
         this.name = name;
         this.address = address;
         this.status = status;
@@ -36,7 +35,7 @@ public class BankAtm {
         this.serviceCost = serviceCost;
     }
 
-    public BankAtm(BankAtm bankAtm) {
+    public BankATM(BankATM bankAtm) {
         this.id = bankAtm.id;
         this.name = bankAtm.name;
         this.address = bankAtm.address;
@@ -50,7 +49,7 @@ public class BankAtm {
         this.serviceCost = bankAtm.serviceCost;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
@@ -70,11 +69,11 @@ public class BankAtm {
         this.address = address;
     }
 
-    public BankAtmStatus getStatus() {
+    public BankATMStatus getStatus() {
         return status;
     }
 
-    public void setStatus(BankAtmStatus status) {
+    public void setStatus(BankATMStatus status) {
         this.status = status;
     }
 
@@ -137,7 +136,7 @@ public class BankAtm {
     @Override
     public String toString() {
         String totalMoney = new DecimalFormat(DecimalFormatConstants.MONEY_FORMAT).format(this.totalMoney);
-        return "BankAtm{" +
+        return "BankATM{" +
                 "\nid=" + id +
                 "\nname='" + name + '\'' +
                 "\naddress='" + address + '\'' +

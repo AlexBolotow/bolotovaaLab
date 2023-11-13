@@ -5,31 +5,32 @@ import tech.reliab.course.bolotovaa.bank.utils.DecimalFormatConstants;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BankOffice {
     public static final BigDecimal MAX_TOTAL_MONEY = new BigDecimal(1000000);
-    private final UUID id;
+    private final long id;
     private String name;
     private String address;
     private BankOfficeStatus status;
     private boolean isAtmPossible;
-    private long countAtm;
+    private List<BankATM> bankATMS;
     private boolean isCreditPossible;
     private boolean isWithdrawMoney;
     private boolean isDepositMoney;
     private BigDecimal totalMoney;
     private BigDecimal rentPrice;
 
-    public BankOffice(String name, String address, BankOfficeStatus status, boolean isAtmPossible, long countAtm,
+    public BankOffice(long id, String name, String address, BankOfficeStatus status, boolean isAtmPossible,
                       boolean isCreditPossible, boolean isWithdrawMoney, boolean isDepositMoney, BigDecimal totalMoney,
                       BigDecimal rentPrice) {
-        this.id = UUID.randomUUID();
+        this.id = id;
         this.name = name;
         this.address = address;
         this.status = status;
         this.isAtmPossible = isAtmPossible;
-        this.countAtm = countAtm;
+        this.bankATMS = new ArrayList<>();
         this.isCreditPossible = isCreditPossible;
         this.isWithdrawMoney = isWithdrawMoney;
         this.isDepositMoney = isDepositMoney;
@@ -43,7 +44,7 @@ public class BankOffice {
         this.address = bankOffice.address;
         this.status = bankOffice.status;
         this.isAtmPossible = bankOffice.isAtmPossible;
-        this.countAtm = bankOffice.countAtm;
+        this.bankATMS = bankOffice.bankATMS;
         this.isCreditPossible = bankOffice.isCreditPossible;
         this.isWithdrawMoney = bankOffice.isWithdrawMoney;
         this.isDepositMoney = bankOffice.isDepositMoney;
@@ -51,7 +52,7 @@ public class BankOffice {
         this.rentPrice = bankOffice.rentPrice;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
@@ -85,14 +86,6 @@ public class BankOffice {
 
     public void setAtmPossible(boolean atmPossible) {
         isAtmPossible = atmPossible;
-    }
-
-    public long getCountAtm() {
-        return countAtm;
-    }
-
-    public void setCountAtm(long countAtm) {
-        this.countAtm = countAtm;
     }
 
     public boolean isCreditPossible() {
@@ -135,6 +128,14 @@ public class BankOffice {
         this.rentPrice = rentPrice;
     }
 
+    public List<BankATM> getBankATMS() {
+        return bankATMS;
+    }
+
+    public void setBankATMS(List<BankATM> bankATMS) {
+        this.bankATMS = bankATMS;
+    }
+
     @Override
     public String toString() {
         String totalMoney = new DecimalFormat(DecimalFormatConstants.MONEY_FORMAT).format(this.totalMoney);
@@ -145,7 +146,6 @@ public class BankOffice {
                 "\naddress='" + address + '\'' +
                 "\nstatus=" + status +
                 "\nisAtmPossible=" + isAtmPossible +
-                "\ncountAtm=" + countAtm +
                 "\nisCreditPossible=" + isCreditPossible +
                 "\nisWithdrawMoney=" + isWithdrawMoney +
                 "\nisDepositMoney=" + isDepositMoney +

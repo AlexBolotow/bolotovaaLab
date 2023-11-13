@@ -5,10 +5,10 @@ import tech.reliab.course.bolotovaa.bank.utils.DecimalFormatConstants;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.UUID;
+import java.time.format.DateTimeFormatter;
 
 public class Employee {
-    private final UUID id;
+    private final long id;
     private String fullName;
     private LocalDate birthday;
     private String position;
@@ -18,22 +18,16 @@ public class Employee {
     private boolean canIssueCredit;
     private BigDecimal salary;
 
-    public Employee(String fullName, LocalDate birthday, String position, Bank bank, boolean isWorkRemotely,
+    public Employee(long id, String fullName, LocalDate birthday, String position, Bank bank, boolean isWorkRemotely,
                     BankOffice bankOffice, boolean canIssueCredit, BigDecimal salary) {
-        this.id = UUID.randomUUID();
+        this.id = id;
         this.fullName = fullName;
         this.birthday = birthday;
         this.position = position;
         this.bank = bank;
         this.isWorkRemotely = isWorkRemotely;
         this.bankOffice = bankOffice;
-
-        if (bankOffice.isCreditPossible()) {
-            this.canIssueCredit = canIssueCredit;
-        } else {
-            this.canIssueCredit = false;
-        }
-
+        this.canIssueCredit = canIssueCredit;
         this.salary = salary;
     }
 
@@ -49,7 +43,7 @@ public class Employee {
         this.salary = employee.salary;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
@@ -120,10 +114,11 @@ public class Employee {
     @Override
     public String toString() {
         String salary = new DecimalFormat(DecimalFormatConstants.MONEY_FORMAT).format(this.salary);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return "Employee{" +
                 "\nid=" + id +
                 "\nfullName='" + fullName + '\'' +
-                "\nbirthday=" + birthday +
+                "\nbirthday=" + birthday.format(formatter) +
                 "\nposition='" + position + '\'' +
                 "\nbank=" + bank.getName() +
                 "\nisWorkRemotely=" + isWorkRemotely +

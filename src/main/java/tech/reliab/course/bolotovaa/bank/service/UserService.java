@@ -5,18 +5,20 @@ import tech.reliab.course.bolotovaa.bank.entity.CreditAccount;
 import tech.reliab.course.bolotovaa.bank.entity.PaymentAccount;
 import tech.reliab.course.bolotovaa.bank.entity.User;
 
+import java.util.List;
+
 public interface UserService {
     User createUser(User user);
 
-    boolean addBank(User user, Bank bank);
+    boolean addBanks(User user, List<Bank> banks);
 
-    boolean deleteBank(User user, Bank bank);
+    boolean deleteBanks(User user, List<Bank> banks);
 
-    boolean addCreditAccount(User user, CreditAccount creditAccount);
+    boolean addCreditAccounts(User user, List<CreditAccount> creditAccounts);
 
-    boolean deleteCreditAccount(User user, CreditAccount creditAccount);
+    boolean deleteCreditAccounts(User user, List<CreditAccount> creditAccounts);
 
-    boolean addPaymentAccount(User user, PaymentAccount paymentAccount);
+    boolean addPaymentAccounts(User user, List<PaymentAccount> paymentAccounts);
 
-    boolean deletePaymentAccount(User user, PaymentAccount paymentAccount);
+    boolean deletePaymentAccounts(User user, List<PaymentAccount> paymentAccounts);
 }

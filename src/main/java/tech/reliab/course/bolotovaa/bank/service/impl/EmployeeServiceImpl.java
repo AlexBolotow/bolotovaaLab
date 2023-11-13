@@ -13,10 +13,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             return null;
         }
 
-        if (employee.getBank() == null) {
-            return null;
-        }
-
         if (employee.getSalary().doubleValue() < 0) {
             return null;
         }

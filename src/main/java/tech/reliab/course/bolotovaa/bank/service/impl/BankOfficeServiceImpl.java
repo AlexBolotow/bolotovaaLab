@@ -1,11 +1,12 @@
 package tech.reliab.course.bolotovaa.bank.service.impl;
 
-import tech.reliab.course.bolotovaa.bank.entity.BankAtm;
+import tech.reliab.course.bolotovaa.bank.entity.BankATM;
 import tech.reliab.course.bolotovaa.bank.entity.BankOffice;
 import tech.reliab.course.bolotovaa.bank.enums.BankOfficeStatus;
 import tech.reliab.course.bolotovaa.bank.service.BankOfficeService;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class BankOfficeServiceImpl implements BankOfficeService {
     @Override
@@ -64,21 +65,38 @@ public class BankOfficeServiceImpl implements BankOfficeService {
     }
 
     @Override
-    public boolean addBankAtm(BankOffice bankOffice, BankAtm bankAtm) {
-        if (bankOffice != null && bankAtm != null) {
+    public boolean addBankATM(BankOffice bankOffice, List<BankATM> bankATMS) {
+        if (bankOffice != null && bankATMS != null) {
             if (bankOffice.isAtmPossible()) {
-                bankOffice.setCountAtm(bankOffice.getCountAtm() + 1);
+                for (BankATM bankATM : bankATMS) {
+                    if (bankOffice.getBankATMS().contains(bankATM)) {
+                        return false;
+                    }
+                }
+
+                List<BankATM> newBankATMS = bankOffice.getBankATMS();
+                newBankATMS.addAll(bankATMS);
+                bankOffice.setBankATMS(bankATMS);
                 return true;
             }
         }
         return false;
     }
 
+
     @Override
-    public boolean deleteBankAtm(BankOffice bankOffice, BankAtm bankAtm) {
-        if (bankOffice != null && bankAtm != null) {
-            if (bankOffice.getCountAtm() > 0) {
-                bankOffice.setCountAtm(bankOffice.getCountAtm() - 1);
+    public boolean deleteBankATM(BankOffice bankOffice, List<BankATM> bankATMS) {
+        if (bankOffice != null && bankATMS != null) {
+            if (bankOffice.isAtmPossible()) {
+                for (BankATM bankATM : bankATMS) {
+                    if (!bankOffice.getBankATMS().contains(bankATM)) {
+                        return false;
+                    }
+                }
+
+                List<BankATM> newBankATMS = bankOffice.getBankATMS();
+                newBankATMS.removeAll(bankATMS);
+                bankOffice.setBankATMS(bankATMS);
                 return true;
             }
         }

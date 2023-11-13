@@ -4,16 +4,15 @@ import tech.reliab.course.bolotovaa.bank.utils.DecimalFormatConstants;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.UUID;
 
 public class PaymentAccount {
-    private final UUID id;
+    private final long id;
     private User user;
     private Bank bank;
     private BigDecimal amountMoney;
 
-    public PaymentAccount(User user, Bank bank, BigDecimal amountMoney) {
-        this.id = UUID.randomUUID();
+    public PaymentAccount(long id, User user, Bank bank, BigDecimal amountMoney) {
+        this.id = id;
         this.user = user;
         this.bank = bank;
         this.amountMoney = amountMoney;
@@ -26,7 +25,7 @@ public class PaymentAccount {
         this.amountMoney = paymentAccount.amountMoney;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 

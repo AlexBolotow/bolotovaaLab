@@ -5,29 +5,31 @@ import tech.reliab.course.bolotovaa.bank.utils.DecimalFormatConstants;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class User {
-    private final UUID id;
+    private final long id;
     private String fullName;
     private LocalDate birthday;
     private String placeWork;
     private BigDecimal salary;
-    private ArrayList<Bank> banks;
-    private ArrayList<CreditAccount> creditAccounts;
-    private ArrayList<PaymentAccount> paymentAccounts;
+    private List<Bank> banks;
+    private List<CreditAccount> creditAccounts;
+    private List<PaymentAccount> paymentAccounts;
     private long creditRating;
 
-    public User(String fullName, LocalDate birthday, String placeWork, ArrayList<Bank> banks) {
-        this.id = UUID.randomUUID();
+    public User(long id, String fullName, LocalDate birthday, String placeWork) {
+        this.id = id;
         this.fullName = fullName;
         this.birthday = birthday;
         this.placeWork = placeWork;
+        banks = new ArrayList<>();
+        creditAccounts = new ArrayList<>();
+        paymentAccounts = new ArrayList<>();
         this.salary = BigDecimal.valueOf(Math.random() * 10001);
-        this.banks = banks;
-        int tmp = (int) Math.round(this.salary.doubleValue() / 1000) * 1000;
+        int tmp = (int) Math.round(this.salary.doubleValue() / 1000) * 100;
         this.creditRating = Math.min(tmp, 1000);
     }
 
@@ -37,13 +39,12 @@ public class User {
         this.birthday = user.birthday;
         this.placeWork = user.placeWork;
         this.salary = user.salary;
-        this.banks = user.banks;
         this.creditRating = user.creditRating;
         this.creditAccounts = user.creditAccounts;
         this.paymentAccounts = user.paymentAccounts;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
@@ -79,15 +80,7 @@ public class User {
         this.salary = salary;
     }
 
-    public ArrayList<Bank> getBanks() {
-        return banks;
-    }
-
-    public void setBanks(ArrayList<Bank> banks) {
-        this.banks = banks;
-    }
-
-    public ArrayList<CreditAccount> getCreditAccounts() {
+    public List<CreditAccount> getCreditAccounts() {
         return creditAccounts;
     }
 
@@ -95,11 +88,19 @@ public class User {
         this.creditAccounts = creditAccounts;
     }
 
-    public ArrayList<PaymentAccount> getPaymentAccounts() {
+    public void setCreditAccounts(List<CreditAccount> creditAccounts) {
+        this.creditAccounts = creditAccounts;
+    }
+
+    public List<PaymentAccount> getPaymentAccounts() {
         return paymentAccounts;
     }
 
     public void setPaymentAccounts(ArrayList<PaymentAccount> paymentAccounts) {
+        this.paymentAccounts = paymentAccounts;
+    }
+
+    public void setPaymentAccounts(List<PaymentAccount> paymentAccounts) {
         this.paymentAccounts = paymentAccounts;
     }
 
@@ -111,19 +112,24 @@ public class User {
         this.creditRating = creditRating;
     }
 
+    public List<Bank> getBanks() {
+        return banks;
+    }
+
+    public void setBanks(List<Bank> banks) {
+        this.banks = banks;
+    }
+
     @Override
     public String toString() {
         String salary = new DecimalFormat(DecimalFormatConstants.MONEY_FORMAT).format(this.salary);
-        List<String> banksName = banks.stream().map(Bank::getName).toList();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return "User{" +
                 "\nid=" + id +
                 "\nfullName='" + fullName + '\'' +
-                "\nbirthday=" + birthday +
+                "\nbirthday=" + birthday.format(formatter) +
                 "\nplaceWork='" + placeWork + '\'' +
                 "\nsalary=" + salary +
-                "\nbanks=" + banksName +
-                "\ncreditAccounts=" + creditAccounts +
-                "\npaymentAccounts=" + paymentAccounts +
                 "\ncreditRating=" + creditRating +
                 '}';
     }

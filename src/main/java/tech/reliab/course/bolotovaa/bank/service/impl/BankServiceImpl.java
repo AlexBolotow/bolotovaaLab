@@ -3,6 +3,8 @@ package tech.reliab.course.bolotovaa.bank.service.impl;
 import tech.reliab.course.bolotovaa.bank.entity.*;
 import tech.reliab.course.bolotovaa.bank.service.BankService;
 
+import java.util.List;
+
 public class BankServiceImpl implements BankService {
     @Override
     public Bank createBank(Bank bank) {
@@ -10,88 +12,140 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public boolean addBankOffice(Bank bank, BankOffice bankOffice) {
-        if (bank != null && bankOffice != null) {
-            bank.setCountOffices(bank.getCountOffices() + 1);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean deleteBankOffice(Bank bank, BankOffice bankOffice) {
-        if (bank != null && bankOffice != null) {
-            if (bank.getCountOffices() < 1) {
-                throw new RuntimeException("Error: count bank offices = 0");
+    public boolean addBankOffices(Bank bank, List<BankOffice> bankOffices) {
+        if (bank != null && bankOffices != null) {
+            for (BankOffice bankOffice : bankOffices) {
+                if (bank.getBankOffices().contains(bankOffice)) {
+                    return false;
+                }
             }
 
-            bank.setCountOffices(bank.getCountOffices() - 1);
+            List<BankOffice> newBankOffices = bank.getBankOffices();
+            newBankOffices.addAll(bankOffices);
+            bank.setBankOffices(newBankOffices);
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean addBankAtm(Bank bank, BankAtm bankAtm) {
-        if (bank != null && bankAtm != null) {
-            bank.setCountATM(bank.getCountATM() + 1);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean deleteBankAtm(Bank bank, BankAtm bankAtm) {
-        if (bank != null && bankAtm != null) {
-            if (bank.getCountATM() < 1) {
-                throw new RuntimeException("Error: count bank Atms = 0");
+    public boolean deleteBankOffices(Bank bank, List<BankOffice> bankOffices) {
+        if (bank != null && bankOffices != null) {
+            for (BankOffice bankOffice : bankOffices) {
+                if (!bank.getBankOffices().contains(bankOffice)) {
+                    return false;
+                }
             }
 
-            bank.setCountOffices(bank.getCountOffices() - 1);
+            List<BankOffice> newBankOffices = bank.getBankOffices();
+            newBankOffices.removeAll(bankOffices);
+            bank.setBankOffices(newBankOffices);
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean addEmployee(Bank bank, Employee employee) {
-        if (bank != null && employee != null) {
-            bank.setCountEmployees(bank.getCountEmployees() + 1);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean deleteEmployee(Bank bank, Employee employee) {
-        if (bank != null && employee != null) {
-            if (bank.getCountEmployees() < 1) {
-                throw new RuntimeException("Error: count bank employees = 0");
+    public boolean addBankATMS(Bank bank, List<BankATM> bankATMS) {
+        if (bank != null && bankATMS != null) {
+            for (BankATM bankATM : bankATMS) {
+                if (bank.getBankATMS().contains(bankATM)) {
+                    return false;
+                }
             }
 
-            bank.setCountEmployees(bank.getCountEmployees() - 1);
+            List<BankATM> newBankATMS = bank.getBankATMS();
+            bankATMS.forEach(x -> x.setBank(bank));
+            newBankATMS.addAll(bankATMS);
+            bank.setBankATMS(newBankATMS);
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean addClient(Bank bank, User user) {
-        if (bank != null && user != null) {
-            bank.setCountClients(bank.getCountClients() + 1);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean deleteClient(Bank bank, User user) {
-        if (bank != null && user != null) {
-            if (bank.getCountClients() < 1) {
-                throw new RuntimeException("Error: count bank clients = 0");
+    public boolean deleteBankATMS(Bank bank, List<BankATM> bankATMS) {
+        if (bank != null && bankATMS != null) {
+            for (BankATM bankATM : bankATMS) {
+                if (!bank.getBankATMS().contains(bankATM)) {
+                    return false;
+                }
             }
 
-            bank.setCountClients(bank.getCountClients() - 1);
+            List<BankATM> newBankATMS = bank.getBankATMS();
+            bankATMS.forEach(x -> x.setBank(null));
+            newBankATMS.removeAll(bankATMS);
+            bank.setBankATMS(newBankATMS);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addEmployees(Bank bank, List<Employee> employees) {
+        if (bank != null && employees != null) {
+            for (Employee employee : employees) {
+                if (bank.getEmployees().contains(employee)) {
+                    return false;
+                }
+            }
+
+            List<Employee> newEmployees = bank.getEmployees();
+            employees.forEach(x -> x.setBank(bank));
+            newEmployees.addAll(employees);
+            bank.setEmployees(newEmployees);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteEmployees(Bank bank, List<Employee> employees) {
+        if (bank != null && employees != null) {
+            for (Employee employee : employees) {
+                if (!bank.getEmployees().contains(employee)) {
+                    return false;
+                }
+            }
+
+            List<Employee> newEmployees = bank.getEmployees();
+            employees.forEach(x -> x.setBank(null));
+            newEmployees.removeAll(employees);
+            bank.setEmployees(newEmployees);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addUsers(Bank bank, List<User> users) {
+        if (bank != null && users != null) {
+            for (User user : users) {
+                if (bank.getUsers().contains(user)) {
+                    return false;
+                }
+            }
+
+            List<User> newUsers = bank.getUsers();
+            newUsers.addAll(users);
+            bank.setUsers(newUsers);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteUsers(Bank bank, List<User> users) {
+        if (bank != null && users != null) {
+            for (User user : users) {
+                if (!bank.getUsers().contains(user)) {
+                    return false;
+                }
+            }
+
+            List<User> newUsers = bank.getUsers();
+            newUsers.removeAll(users);
+            bank.setUsers(newUsers);
             return true;
         }
         return false;

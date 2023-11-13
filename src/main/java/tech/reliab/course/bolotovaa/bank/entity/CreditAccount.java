@@ -5,10 +5,10 @@ import tech.reliab.course.bolotovaa.bank.utils.DecimalFormatConstants;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.UUID;
+import java.time.format.DateTimeFormatter;
 
 public class CreditAccount {
-    private final UUID id;
+    private final long id;
     private User user;
     private Bank bank;
     private LocalDate startCredit;
@@ -20,10 +20,10 @@ public class CreditAccount {
     private Employee employee;
     private PaymentAccount paymentAccount;
 
-    public CreditAccount(User user, Bank bank, LocalDate startCredit, LocalDate finishCredit,
+    public CreditAccount(long id, User user, Bank bank, LocalDate startCredit, LocalDate finishCredit,
                          long countMonth, BigDecimal amountCredit, BigDecimal monthlyPayment,
                          Employee employee, PaymentAccount paymentAccount) {
-        this.id = UUID.randomUUID();
+        this.id = id;
         this.user = user;
         this.bank = bank;
         this.startCredit = startCredit;
@@ -50,7 +50,7 @@ public class CreditAccount {
         this.paymentAccount = creditAccount.paymentAccount;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
@@ -137,12 +137,13 @@ public class CreditAccount {
     @Override
     public String toString() {
         String amountCredit = new DecimalFormat(DecimalFormatConstants.MONEY_FORMAT).format(this.amountCredit);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return "CreditAccount{" +
                 "\nid=" + id +
                 "\nuser=" + user.getFullName() +
                 "\nbank=" + bank.getName() +
-                "\nstartCredit=" + startCredit +
-                "\nfinishCredit=" + finishCredit +
+                "\nstartCredit=" + startCredit.format(formatter) +
+                "\nfinishCredit=" + finishCredit.format(formatter) +
                 "\ncountMonth=" + countMonth +
                 "\namountCredit=" + amountCredit +
                 "\nmonthlyPayment=" + monthlyPayment +

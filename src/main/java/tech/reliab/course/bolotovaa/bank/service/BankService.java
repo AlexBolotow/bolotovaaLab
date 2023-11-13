@@ -2,6 +2,8 @@ package tech.reliab.course.bolotovaa.bank.service;
 
 import tech.reliab.course.bolotovaa.bank.entity.*;
 
+import java.util.List;
+
 public interface BankService {
     /**
      * Создание банка
@@ -12,75 +14,75 @@ public interface BankService {
     Bank createBank(Bank bank);
 
     /**
-     * Добавление офиса
+     * Добавление офисов
      *
-     * @param bank       банк
-     * @param bankOffice офис
-     * @return значение true, если офис добавлен, иначе false
+     * @param bank        банк
+     * @param bankOffices офисы
+     * @return значение true, если офисы добавлены, иначе false
      */
-    boolean addBankOffice(Bank bank, BankOffice bankOffice);
+    boolean addBankOffices(Bank bank, List<BankOffice> bankOffices);
 
     /**
-     * Удаление офиса
+     * Удаление офисов
      *
-     * @param bank       банк
-     * @param bankOffice офис
-     * @return значение true, если офис удален, иначе false
+     * @param bank        банк
+     * @param bankOffices офисы
+     * @return значение true, если офисы удалены, иначе false
      */
-    boolean deleteBankOffice(Bank bank, BankOffice bankOffice);
+    boolean deleteBankOffices(Bank bank, List<BankOffice> bankOffices);
 
     /**
-     * Добавление банкомата
-     *
-     * @param bank    банк
-     * @param bankAtm банкомат
-     * @return значение true, если банкомат добавлен, иначе false
-     */
-    boolean addBankAtm(Bank bank, BankAtm bankAtm);
-
-    /**
-     * Удаление банкомата
-     *
-     * @param bank    банк
-     * @param bankAtm банкомат
-     * @return значение true, если банкомат удален, иначе false
-     */
-    boolean deleteBankAtm(Bank bank, BankAtm bankAtm);
-
-    /**
-     * Добавление сотрудника
+     * Добавление банкоматов
      *
      * @param bank     банк
-     * @param employee сотрудник
-     * @return значение true, если сотрудник добавлен, иначе false
+     * @param bankATMS банкоматы
+     * @return значение true, если банкоматы добавлены, иначе false
      */
-    boolean addEmployee(Bank bank, Employee employee);
+    boolean addBankATMS(Bank bank, List<BankATM> bankATMS);
 
     /**
-     * Удаление сотрудника
+     * Удаление банкоматов
      *
      * @param bank     банк
-     * @param employee сотрудник
-     * @return значение true, если сотрудник удален, иначе false
+     * @param bankATMS банкоматы
+     * @return значение true, если банкоматы удалены, иначе false
      */
-    boolean deleteEmployee(Bank bank, Employee employee);
+    boolean deleteBankATMS(Bank bank, List<BankATM> bankATMS);
 
     /**
-     * Добавление клиента
+     * Добавление сотрудников
      *
-     * @param bank банк
-     * @param user клиент
-     * @return значение true, если клиент добавлен, иначе false
+     * @param bank      банк
+     * @param employees сотрудники
+     * @return значение true, если сотрудники добавлены, иначе false
      */
-    boolean addClient(Bank bank, User user);
+    boolean addEmployees(Bank bank, List<Employee> employees);
 
     /**
-     * Удаление клиента
+     * Удаление сотрудников
      *
-     * @param bank банк
-     * @param user клиент
-     * @return значение true, если клиент удален, иначе false
+     * @param bank      банк
+     * @param employees сотрудники
+     * @return значение true, если сотрудники удалены, иначе false
      */
-    boolean deleteClient(Bank bank, User user);
+    boolean deleteEmployees(Bank bank, List<Employee> employees);
+
+    /**
+     * Добавление клиентов
+     *
+     * @param bank  банк
+     * @param users клиенты
+     * @return значение true, если клиенты добавлены, иначе false
+     */
+    boolean addUsers(Bank bank, List<User> users);
+
+    /**
+     * Удаление клиентов
+     *
+     * @param bank  банк
+     * @param users клиенты
+     * @return значение true, если клиенты удалены, иначе false
+     */
+    boolean deleteUsers(Bank bank, List<User> users);
 
 }

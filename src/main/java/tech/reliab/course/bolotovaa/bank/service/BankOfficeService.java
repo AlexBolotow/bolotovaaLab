@@ -1,9 +1,10 @@
 package tech.reliab.course.bolotovaa.bank.service;
 
-import tech.reliab.course.bolotovaa.bank.entity.BankAtm;
+import tech.reliab.course.bolotovaa.bank.entity.BankATM;
 import tech.reliab.course.bolotovaa.bank.entity.BankOffice;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface BankOfficeService {
     BankOffice createBankOffice(BankOffice bankOffice);
@@ -12,7 +13,7 @@ public interface BankOfficeService {
 
     boolean withdrawMoney(BankOffice bankOffice, BigDecimal amount);
 
-    boolean addBankAtm(BankOffice bankOffice, BankAtm bankAtm);
+    boolean addBankATM(BankOffice bankOffice, List<BankATM> bankATMS);
 
-    boolean deleteBankAtm(BankOffice bankOffice, BankAtm bankAtm);
+    boolean deleteBankATM(BankOffice bankOffice, List<BankATM> bankATMS);
 }

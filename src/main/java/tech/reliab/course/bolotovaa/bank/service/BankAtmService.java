@@ -1,13 +1,16 @@
 package tech.reliab.course.bolotovaa.bank.service;
 
-import tech.reliab.course.bolotovaa.bank.entity.BankAtm;
+import tech.reliab.course.bolotovaa.bank.entity.BankATM;
+import tech.reliab.course.bolotovaa.bank.entity.Employee;
 
 import java.math.BigDecimal;
 
 public interface BankAtmService {
-    BankAtm createBankAtm(BankAtm bankAtm);
+    BankATM createBankAtm(BankATM bankAtm);
 
-    boolean depositMoney(BankAtm bankAtm, BigDecimal amount);
+    boolean depositMoney(BankATM bankAtm, BigDecimal amount);
 
-    boolean withdrawMoney(BankAtm bankAtm, BigDecimal amount);
+    boolean withdrawMoney(BankATM bankAtm, BigDecimal amount);
+
+    boolean updateServiceEmployee(BankATM bankAtm, Employee employee);
 }

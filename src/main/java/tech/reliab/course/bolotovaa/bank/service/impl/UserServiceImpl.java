@@ -6,7 +6,7 @@ import tech.reliab.course.bolotovaa.bank.entity.PaymentAccount;
 import tech.reliab.course.bolotovaa.bank.entity.User;
 import tech.reliab.course.bolotovaa.bank.service.UserService;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
     @Override
@@ -19,22 +19,42 @@ public class UserServiceImpl implements UserService {
             return null;
         }
 
-        if (user.getBanks().size() < 1) {
-            return null;
-        }
-
         return new User(user);
     }
 
     @Override
-    public boolean addBank(User user, Bank bank) {
-        if (user != null && bank != null) {
-            if (user.getBanks().contains(bank)) {
-                return false;
+    public boolean addBanks(User user, List<Bank> banks) {
+        if (user != null && banks != null) {
+            if (user.getBanks() != null) {
+                for (Bank bank : banks) {
+                    if (user.getBanks().contains(bank)) {
+                        return false;
+                    }
+                }
+
+                List<Bank> newBanks = user.getBanks();
+                newBanks.addAll(banks);
+                user.setBanks(newBanks);
+            } else {
+                user.setBanks(banks);
             }
 
-            ArrayList<Bank> newBanks = user.getBanks();
-            newBanks.add(bank);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteBanks(User user, List<Bank> banks) {
+        if (user != null && banks != null) {
+            for (Bank bank : banks) {
+                if (!user.getBanks().contains(bank)) {
+                    return false;
+                }
+            }
+
+            List<Bank> newBanks = user.getBanks();
+            newBanks.removeAll(banks);
             user.setBanks(newBanks);
             return true;
         }
@@ -42,79 +62,70 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteBank(User user, Bank bank) {
-        if (user != null && bank != null) {
-            if (!user.getBanks().contains(bank)) {
-                return false;
-            }
+    public boolean addCreditAccounts(User user, List<CreditAccount> creditAccounts) {
+        if (user != null && creditAccounts != null) {
+            for (CreditAccount creditAccount : creditAccounts)
+                if (user.getCreditAccounts().contains(creditAccount)) {
+                    return false;
+                }
 
-            ArrayList<Bank> newBanks = user.getBanks();
-            newBanks.remove(bank);
-            user.setBanks(newBanks);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean addCreditAccount(User user, CreditAccount creditAccount) {
-        if (user != null && creditAccount != null) {
-            if (user.getCreditAccounts().contains(creditAccount)) {
-                return false;
-            }
-
-            ArrayList<CreditAccount> newCreditAccounts = user.getCreditAccounts();
-            newCreditAccounts.add(creditAccount);
+            List<CreditAccount> newCreditAccounts = user.getCreditAccounts();
+            creditAccounts.forEach(x -> x.setUser(user));
+            newCreditAccounts.addAll(creditAccounts);
             user.setCreditAccounts(newCreditAccounts);
-            creditAccount.setUser(user);
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean deleteCreditAccount(User user, CreditAccount creditAccount) {
-        if (user != null && creditAccount != null) {
-            if (!user.getCreditAccounts().contains(creditAccount)) {
-                return false;
-            }
+    public boolean deleteCreditAccounts(User user, List<CreditAccount> creditAccounts) {
+        if (user != null && creditAccounts != null) {
+            for (CreditAccount creditAccount : creditAccounts)
+                if (!user.getCreditAccounts().contains(creditAccount)) {
+                    return false;
+                }
 
-            ArrayList<CreditAccount> newCreditAccounts = user.getCreditAccounts();
-            newCreditAccounts.remove(creditAccount);
+            List<CreditAccount> newCreditAccounts = user.getCreditAccounts();
+            creditAccounts.forEach(x -> x.setUser(null));
+            newCreditAccounts.removeAll(creditAccounts);
             user.setCreditAccounts(newCreditAccounts);
-            creditAccount.setUser(null);
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean addPaymentAccount(User user, PaymentAccount paymentAccount) {
-        if (user != null && paymentAccount != null) {
-            if (user.getPaymentAccounts().contains(paymentAccount)) {
-                return false;
+    public boolean addPaymentAccounts(User user, List<PaymentAccount> paymentAccounts) {
+        if (user != null && paymentAccounts != null) {
+            for (PaymentAccount paymentAccount : paymentAccounts) {
+                if (user.getPaymentAccounts().contains(paymentAccount)) {
+                    return false;
+                }
             }
 
-            ArrayList<PaymentAccount> newPaymentAccounts = user.getPaymentAccounts();
-            newPaymentAccounts.add(paymentAccount);
+            List<PaymentAccount> newPaymentAccounts = user.getPaymentAccounts();
+            paymentAccounts.forEach(x -> x.setUser(user));
+            newPaymentAccounts.addAll(paymentAccounts);
             user.setPaymentAccounts(newPaymentAccounts);
-            paymentAccount.setUser(user);
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean deletePaymentAccount(User user, PaymentAccount paymentAccount) {
-        if (user != null && paymentAccount != null) {
-            if (!user.getPaymentAccounts().contains(paymentAccount)) {
-                return false;
+    public boolean deletePaymentAccounts(User user, List<PaymentAccount> paymentAccounts) {
+        if (user != null && paymentAccounts != null) {
+            for (PaymentAccount paymentAccount : paymentAccounts) {
+                if (!user.getPaymentAccounts().contains(paymentAccount)) {
+                    return false;
+                }
             }
 
-            ArrayList<PaymentAccount> newPaymentAccounts = user.getPaymentAccounts();
-            newPaymentAccounts.remove(paymentAccount);
+            List<PaymentAccount> newPaymentAccounts = user.getPaymentAccounts();
+            paymentAccounts.forEach(x -> x.setUser(null));
+            newPaymentAccounts.removeAll(paymentAccounts);
             user.setPaymentAccounts(newPaymentAccounts);
-            paymentAccount.setUser(null);
             return true;
         }
         return false;
