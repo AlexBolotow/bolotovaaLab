@@ -1,7 +1,7 @@
 package tech.reliab.course.bolotovaa.bank;
 
 import tech.reliab.course.bolotovaa.bank.entity.*;
-import tech.reliab.course.bolotovaa.bank.enums.BankAtmStatus;
+import tech.reliab.course.bolotovaa.bank.enums.BankATMStatus;
 import tech.reliab.course.bolotovaa.bank.enums.BankOfficeStatus;
 import tech.reliab.course.bolotovaa.bank.service.*;
 import tech.reliab.course.bolotovaa.bank.service.impl.*;
@@ -25,9 +25,9 @@ public class Main {
                 LocalDate.of(1979, 5, 19), "Service employee",
                 bank, false, bankOffice, true, BigDecimal.valueOf(5000)));
 
-        BankAtmService bankAtmService = new BankAtmServiceImpl();
-        BankAtm bankAtm = bankAtmService.createBankAtm(new BankAtm("First", "Via Giuseppe Verdi, 7",
-                BankAtmStatus.WORK, bank, bankOffice, employee, true, true,
+        BankATMService bankAtmService = new BankATMServiceImpl();
+        BankATM bankAtm = bankAtmService.createBankAtm(new BankATM("First", "Via Giuseppe Verdi, 7",
+                BankATMStatus.WORK, bank, bankOffice, employee, true, true,
                 BigDecimal.valueOf(24000), BigDecimal.valueOf(2500)));
 
         ArrayList<Bank> banks = new ArrayList<>();

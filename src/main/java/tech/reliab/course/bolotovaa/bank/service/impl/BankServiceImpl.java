@@ -32,7 +32,7 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public boolean addBankAtm(Bank bank, BankAtm bankAtm) {
+    public boolean addBankAtm(Bank bank, BankATM bankAtm) {
         if (bank != null && bankAtm != null) {
             bank.setCountATM(bank.getCountATM() + 1);
             return true;
@@ -41,7 +41,7 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public boolean deleteBankAtm(Bank bank, BankAtm bankAtm) {
+    public boolean deleteBankAtm(Bank bank, BankATM bankAtm) {
         if (bank != null && bankAtm != null) {
             if (bank.getCountATM() < 1) {
                 throw new RuntimeException("Error: count bank Atms = 0");

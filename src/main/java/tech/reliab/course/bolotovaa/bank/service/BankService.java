@@ -36,7 +36,7 @@ public interface BankService {
      * @param bankAtm банкомат
      * @return значение true, если банкомат добавлен, иначе false
      */
-    boolean addBankAtm(Bank bank, BankAtm bankAtm);
+    boolean addBankAtm(Bank bank, BankATM bankAtm);
 
     /**
      * Удаление банкомата
@@ -45,7 +45,7 @@ public interface BankService {
      * @param bankAtm банкомат
      * @return значение true, если банкомат удален, иначе false
      */
-    boolean deleteBankAtm(Bank bank, BankAtm bankAtm);
+    boolean deleteBankAtm(Bank bank, BankATM bankAtm);
 
     /**
      * Добавление сотрудника

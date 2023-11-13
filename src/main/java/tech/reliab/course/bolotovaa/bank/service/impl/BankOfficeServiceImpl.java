@@ -1,6 +1,6 @@
 package tech.reliab.course.bolotovaa.bank.service.impl;
 
-import tech.reliab.course.bolotovaa.bank.entity.BankAtm;
+import tech.reliab.course.bolotovaa.bank.entity.BankATM;
 import tech.reliab.course.bolotovaa.bank.entity.BankOffice;
 import tech.reliab.course.bolotovaa.bank.enums.BankOfficeStatus;
 import tech.reliab.course.bolotovaa.bank.service.BankOfficeService;
@@ -64,7 +64,7 @@ public class BankOfficeServiceImpl implements BankOfficeService {
     }
 
     @Override
-    public boolean addBankAtm(BankOffice bankOffice, BankAtm bankAtm) {
+    public boolean addBankAtm(BankOffice bankOffice, BankATM bankAtm) {
         if (bankOffice != null && bankAtm != null) {
             if (bankOffice.isAtmPossible()) {
                 bankOffice.setCountAtm(bankOffice.getCountAtm() + 1);
@@ -75,7 +75,7 @@ public class BankOfficeServiceImpl implements BankOfficeService {
     }
 
     @Override
-    public boolean deleteBankAtm(BankOffice bankOffice, BankAtm bankAtm) {
+    public boolean deleteBankAtm(BankOffice bankOffice, BankATM bankAtm) {
         if (bankOffice != null && bankAtm != null) {
             if (bankOffice.getCountAtm() > 0) {
                 bankOffice.setCountAtm(bankOffice.getCountAtm() - 1);

@@ -1,14 +1,14 @@
 package tech.reliab.course.bolotovaa.bank.service.impl;
 
-import tech.reliab.course.bolotovaa.bank.entity.BankAtm;
-import tech.reliab.course.bolotovaa.bank.enums.BankAtmStatus;
-import tech.reliab.course.bolotovaa.bank.service.BankAtmService;
+import tech.reliab.course.bolotovaa.bank.entity.BankATM;
+import tech.reliab.course.bolotovaa.bank.enums.BankATMStatus;
+import tech.reliab.course.bolotovaa.bank.service.BankATMService;
 
 import java.math.BigDecimal;
 
-public class BankAtmServiceImpl implements BankAtmService {
+public class BankATMServiceImpl implements BankATMService {
     @Override
-    public BankAtm createBankAtm(BankAtm bankAtm) {
+    public BankATM createBankAtm(BankATM bankAtm) {
         if (bankAtm.getBank() == null) {
             return null;
         }
@@ -25,7 +25,7 @@ public class BankAtmServiceImpl implements BankAtmService {
             return null;
         }
 
-        if (BankAtm.MAX_TOTAL_MONEY.compareTo(bankAtm.getTotalMoney()) < 0) {
+        if (BankATM.MAX_TOTAL_MONEY.compareTo(bankAtm.getTotalMoney()) < 0) {
             return null;
         }
 
@@ -33,18 +33,18 @@ public class BankAtmServiceImpl implements BankAtmService {
             return null;
         }
 
-        return new BankAtm(bankAtm);
+        return new BankATM(bankAtm);
     }
 
     @Override
-    public boolean depositMoney(BankAtm bankAtm, BigDecimal amount) {
+    public boolean depositMoney(BankATM bankAtm, BigDecimal amount) {
         if (bankAtm != null) {
-            if (bankAtm.getStatus() == BankAtmStatus.NOT_WORK || !bankAtm.isDepositMoney()) {
+            if (bankAtm.getStatus() == BankATMStatus.NOT_WORK || !bankAtm.isDepositMoney()) {
                 return false;
             }
 
             //не переполнится ли банкомат при депозите
-            if (BankAtm.MAX_TOTAL_MONEY.compareTo(bankAtm.getTotalMoney().add(amount)) < 0) {
+            if (BankATM.MAX_TOTAL_MONEY.compareTo(bankAtm.getTotalMoney().add(amount)) < 0) {
                 return false;
             }
 
@@ -55,9 +55,9 @@ public class BankAtmServiceImpl implements BankAtmService {
     }
 
     @Override
-    public boolean withdrawMoney(BankAtm bankAtm, BigDecimal amount) {
+    public boolean withdrawMoney(BankATM bankAtm, BigDecimal amount) {
         if (bankAtm != null) {
-            if (bankAtm.getStatus() == BankAtmStatus.NOT_WORK || !bankAtm.isWithdrawMoney()) {
+            if (bankAtm.getStatus() == BankATMStatus.NOT_WORK || !bankAtm.isWithdrawMoney()) {
                 return false;
             }
 
